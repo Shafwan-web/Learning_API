@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Gantari:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+
+/* Custom Fonts */
+.font-Pop {
+  /* font-family: "Poppins";   */
+  font-family: "Poppins";
+}
+.font-G {
+  font-family: "Gantari";
+}
+
+/* ✅ Custom Tailwind Utility */
+@layer utilities {
+  .my-container {
+    @apply w-full mx-auto px-4;
+    /* same as padding-left/right: 4rem */
+  }
+}
+@keyframes slideDown {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@utility animate-slideDown {
+  animation: slideDown 0.3s ease;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
