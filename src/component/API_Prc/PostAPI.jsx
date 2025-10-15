@@ -1,9 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function PostAPI() {
   const [post, setPost] = useState([]);
   const [error, setError] = useState(null);
+
+  const navigate = useNavigate();
   useEffect(() => {
     let Post_Data = "https://jsonplaceholder.typicode.com/posts";
     axios
@@ -23,7 +26,11 @@ export default function PostAPI() {
       <div className="grid grid-cols-3 gap-6 p-3 rounded-2xl">
         {post.map((item) => {
           return (
-            <div className="" key={item.id}>
+            <div
+              className=""
+              key={item.id}
+              onClick={() => navigate(`/API_Prc/${item.id}`)}
+            >
               <div
                 className="border border-[#f2f2f2] rounded-lg p-2 flex flex-col h-full min-h-[100px] hover:scale-105 
               transition-transform duration-300"
