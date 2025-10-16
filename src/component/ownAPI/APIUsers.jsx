@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Farfalle from "../ownAPI/img/Farfalle.jpg";
 import Beef from "../ownAPI/img/Beef Lo Mein Noodles.jpg";
@@ -14,12 +15,27 @@ import SpicyPasta from "../ownAPI/img/spicy pasta.jpg";
 
 export default function APIUsers() {
   const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/APIUsers")
-      .then((res) => setUsers(res.data))
-      .catch((err) => console.error(err));
+    const fetchUsers = async () => {
+      try {
+        let data_user = `http://localhost:5000/api/APIUsers`;
+        const res_data = await axios.get(data_user);
+        // .then((res) => setUsers(res.data));
+        console.log("Data of Users is Fetched :", res_data.data);
+        setUsers(res_data.data);
+      } catch (err) {
+        console.log("Error of User_API", err);
+        setError("Failed to fetch Users 😢");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchUsers();
   }, []);
+
   // const images = {
   //   Farfalle: Farfalle,
   //   Beef: Beef,
@@ -40,6 +56,10 @@ export default function APIUsers() {
     "alfredopasta5.webp": Alfredopasta,
     "spicy-pasta.jpg": SpicyPasta,
   };
+  // <img src={images[userdetails.image]} alt={userdetails.name} />;
+  if (loading)
+    return <p className="text-black font-bold text-lg">Loading...........</p>;
+  if (error) return <p className="text-red-500 font-bold text-lg">{error}</p>;
   return (
     // <div className="mt-16">
     //   <div>
@@ -52,8 +72,9 @@ export default function APIUsers() {
     <div className="mt-16 grid grid-cols-3 gap-8 p-6">
       {users.map((u) => (
         <div
+          className="border border-[#f2f2f2] rounded-lg p-4 shadow-md text-center hover:scale-105 transition-transform duration-500"
           key={u.id}
-          className="border rounded-lg p-4 shadow-md text-center hover:scale-105 transition-transform duration-500"
+          onClick={() => navigate(`/Own_API/${u.id}`)}
         >
           {/* <img
             src={images[u.imageKey]}

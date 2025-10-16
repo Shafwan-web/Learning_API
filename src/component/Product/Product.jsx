@@ -15,7 +15,7 @@ export default function Product() {
         // "https://api.spoonacular.com/recipes/complexSearch?query=pasta&apiKey=0e8124d64d2e49e398c7d6b80a5bb32e";
         let safwan = "https://fakestoreapi.com/products?limit=12";
         const response = await axios.get(safwan);
-        console.log("Fetched data:", response.data);
+        console.log("Data of Product is Fetched :", response.data);
         setRecipes(response.data);
         // old che work
         // axios.get(safwan).then((response) => {
@@ -54,7 +54,7 @@ export default function Product() {
                 src={item.image}
                 alt={item.title}
                 className="w-full h-40 object-cover rounded-lg"
-              />  
+              />
               <h2 className="mt-3 xl:text-lg font-semibold text-center w-[100%] h-[25%]">
                 {item.title}
               </h2>

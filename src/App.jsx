@@ -8,6 +8,7 @@ import APIPrcPages from "./Pages/APIPrcPages";
 import Product from "./component/Product/Product";
 import Product_Details from "./component/Product/Product_Details";
 import PostAPI_Details from "./component/API_Prc/PostAPI_Details";
+import APIUsers_details from "./component/ownAPI/APIUsers_details";
 function App() {
   return (
     <>
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/Own_API/" />} />
         <Route path="/Own_API" element={<APIPages />} />
+        <Route path="/Own_API/:id" element={<APIUsers_details />} />
         <Route path="/API_Prc" element={<APIPrcPages />} />
         <Route path="/API_Prc/:id" element={<PostAPI_Details />} />
         <Route path="/Product" element={<Product />} />
